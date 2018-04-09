@@ -28,11 +28,14 @@ public class ItemSearchForm implements Serializable{
 
     private Category category;
 
-
+    @Transactional
+    public void prepareCategories() {
+        categorySearch = em.createQuery("select c.name from Category c").getResultList();
+    }
     @Transactional
     public void doSearch() {
         Query q = em.createQuery("SELECT i FROM Item i WHERE " +
-                "UPPER(i.categoryDescription) LIKE :categoryItem " +
+                "UPPER(i.category.description) LIKE :categoryItem " +
                 "AND UPPER(i.producerName) LIKE :producerItem");
 
         String categoryItem = "%" + getCategoryItem().toUpperCase() + "%";
@@ -41,6 +44,14 @@ public class ItemSearchForm implements Serializable{
 
         q.setParameter("producerItem", producerItem);
         setSearchResult(q.getResultList());
+    }
+
+    public List<Category> getCategorySearch() {
+        return categorySearch;
+    }
+
+    public void setCategorySearch(List<Category> categorySearch) {
+        this.categorySearch = categorySearch;
     }
 
     public String getCategoryItem() {
