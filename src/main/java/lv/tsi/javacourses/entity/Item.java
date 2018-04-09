@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class Item {
@@ -19,7 +20,7 @@ public class Item {
     @Column
     private String categoryDescription;
     @Column
-    private double price;
+    private BigDecimal price;
     @Column
     private Long producer_ID;
     @Column
@@ -73,11 +74,11 @@ public class Item {
         this.category_ID = category_ID;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

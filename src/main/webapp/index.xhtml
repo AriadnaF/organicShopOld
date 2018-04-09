@@ -15,7 +15,7 @@
 
                     <h:commandButton value="Search" action="#{itemSearchForm.doSearch()}" style="width: 100%"
                                      styleClass="w3-btn w3-green">
-                        <f:ajax render="list" execute="categoryItem"/>
+                        <f:ajax render="list" execute="categoryItem producerItem" />
                     </h:commandButton>
                 </div>
                 <div class="w3-rest w3-container">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <h:panelGroup id="list" styleClass="w3-row">
-                <ui:repeat value="#{itemSearchForm.searchResult}" var="book">
+                <ui:repeat value="#{itemSearchForm.searchResult}" var="item">
                     <div class="w3-col s12 m6 l3 w3-padding">
                         <div class="w3-card-4">
                             <img src="http://via.placeholder.com/250/444/2f2/cover.png?text=#{item.description}"

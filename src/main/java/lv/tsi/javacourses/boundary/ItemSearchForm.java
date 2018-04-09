@@ -2,6 +2,7 @@ package lv.tsi.javacourses.boundary;
 
 import lv.tsi.javacourses.entity.Category;
 import lv.tsi.javacourses.entity.Item;
+import lv.tsi.javacourses.entity.Producer;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -31,12 +32,13 @@ public class ItemSearchForm implements Serializable{
     @Transactional
     public void doSearch() {
         Query q = em.createQuery("SELECT i FROM Item i WHERE " +
-                "UPPER(i.categoryDescriptiomn) LIKE :categoryItem " +
+                "UPPER(i.categoryDescription) LIKE :categoryItem " +
                 "AND UPPER(i.producerName) LIKE :producerItem");
 
         String categoryItem = "%" + getCategoryItem().toUpperCase() + "%";
-        q.setParameter("categoryItem", categoryItem);
         String producerItem = "%" + getProducerItem().toUpperCase() + "%";
+        q.setParameter("categoryItem", categoryItem);
+
         q.setParameter("producerItem", producerItem);
         setSearchResult(q.getResultList());
     }
